@@ -16,16 +16,37 @@ namespace JobApplication.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetVacancies()
+        public async Task<IActionResult> GetVacanciesAsync()
         {
-            return Ok(vacancyRepository.GetAll());
+            return Ok(await vacancyRepository.GetAllAsync());
         }
 
         [HttpPost]
-        public IActionResult CreateVacancy(Vacancy vacancy)
+        public async Task<IActionResult> CreateVacancyAsync(Vacancy vacancy)
         {
-            vacancyRepository.AddVacancy(vacancy);
+            await vacancyRepository.AddVacancyAsync(vacancy);
             return Ok(vacancy);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteVacancyAsync(int id)
+        {
+            await vacancyRepository.DeleteVacancyAsync(id);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateVacancyAsync(int id, Vacancy vacancy)
+        {
+            await vacancyRepository.UpdateVacancyAsync(id, vacancy);
+            return Ok();
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> CloseJobPostAsync(int id)
+        {
+            await vacancyRepository.CloseJobPostAsync(id);
+            return Ok();
         }
     }
 }

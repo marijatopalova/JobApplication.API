@@ -21,6 +21,8 @@ namespace JobApplication.API.Models
 
         public EmploymentType EmploymentType { get; set; }
 
+        public JobPostStatus ActiveStatus { get; set; }
+
         public int IndustryId { get; set; }
 
         [ForeignKey("IndustryId")]

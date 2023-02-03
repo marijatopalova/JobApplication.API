@@ -1,4 +1,5 @@
-﻿using JobApplication.API.Models;
+﻿using JobApplication.API.Enums;
+using JobApplication.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobApplication.API.Repositories
@@ -12,7 +13,7 @@ namespace JobApplication.API.Repositories
             this.context = context;
         }
 
-        public void AddVacancy(Vacancy vacancy)
+        public async Task AddVacancyAsync(Vacancy vacancy)
         {
             var vacancyToAdd = new Vacancy();
             vacancyToAdd.PositionName = vacancy.PositionName;
@@ -22,42 +23,54 @@ namespace JobApplication.API.Repositories
             vacancyToAdd.IsRemote = vacancy.IsRemote;
             vacancyToAdd.SeniorityLevel = vacancy.SeniorityLevel;
             vacancyToAdd.EmploymentType = vacancy.EmploymentType;
+            vacancyToAdd.ActiveStatus = JobPostStatus.Active;
             vacancyToAdd.IndustryId = vacancy.IndustryId;
 
             context.Add(vacancyToAdd);
-            SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public void DeleteVacancy(int id)
+        public async Task CloseJobPostAsync(int id)
         {
-            var vacancy = context.Vacancies.Where(v => v.Id == id).FirstOrDefault();
+            var jobPost = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
+
+            jobPost.ActiveStatus = JobPostStatus.Closed;
+
+            await SaveChangesAsync();
+        }
+
+        public async Task DeleteVacancyAsync(int id)
+        {
+            var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
             if (vacancy != null)
                 context.Vacancies.Remove(vacancy);
+
+            await SaveChangesAsync();
         }
 
-        public List<Vacancy> GetAll()
+        public async Task<List<Vacancy>> GetAllAsync()
         {
-            return context.Vacancies.Include(v => v.Industry).ToList();
+            return await context.Vacancies.Include(v => v.Industry).ToListAsync();
         }
 
-        public Vacancy GetVacancyById(int id)
+        public async Task<Vacancy> GetVacancyByIdAsync(int id)
         {
-            var vacancy = context.Vacancies.Where(v => v.Id == id).FirstOrDefault();
+            var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
             if (vacancy == null) return null;
 
             return vacancy;
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void UpdateVacancy(int id, Vacancy vacancy)
+        public async Task UpdateVacancyAsync(int id, Vacancy vacancy)
         {
-            var vacancyToUpdate = context.Vacancies.Where(v => v.Id == id).FirstOrDefault();
+            var vacancyToUpdate = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
             vacancyToUpdate.PositionName = vacancy.PositionName;
             vacancyToUpdate.Description = vacancy.Description;
@@ -68,7 +81,7 @@ namespace JobApplication.API.Repositories
             vacancyToUpdate.EmploymentType = vacancy.EmploymentType;
             vacancyToUpdate.Industry = vacancy.Industry;
 
-            SaveChanges();
+            await SaveChangesAsync();
         }
     }
 }
