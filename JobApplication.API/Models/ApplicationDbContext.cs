@@ -12,6 +12,7 @@ namespace JobApplication.API.Models
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Vacancy> Vacancies { get; set; }
         public DbSet<Industry> Industries { get; set; }
+        public DbSet<JobApplicant> JobApplicants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
