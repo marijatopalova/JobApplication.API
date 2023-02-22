@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobApplication.API.Repositories
 {
-    public class VacancyRepository : IVacancyRepository
+    public class JobPostRepository : IJobPostRepository
     {
         private readonly ApplicationDbContext context;
 
-        public VacancyRepository(ApplicationDbContext context)
+        public JobPostRepository(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        public async Task AddVacancyAsync(Vacancy vacancy)
+        public async Task AddJobPostAsync(Vacancy vacancy)
         {
             var vacancyToAdd = new Vacancy();
             vacancyToAdd.PositionName = vacancy.PositionName;
@@ -39,7 +39,7 @@ namespace JobApplication.API.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task DeleteVacancyAsync(int id)
+        public async Task DeleteJobPostAsync(int id)
         {
             var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
@@ -49,12 +49,17 @@ namespace JobApplication.API.Repositories
             await SaveChangesAsync();
         }
 
+        public Task<List<Vacancy>> GetActiveJobPostsAsync()
+        {
+            return context.Vacancies.Where(x => x.ActiveStatus == JobPostStatus.Active).ToListAsync();
+        }
+
         public async Task<List<Vacancy>> GetAllAsync()
         {
             return await context.Vacancies.Include(v => v.Industry).ToListAsync();
         }
 
-        public async Task<Vacancy> GetVacancyByIdAsync(int id)
+        public async Task<Vacancy> GetJobPostByIdAsync(int id)
         {
             var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
@@ -68,7 +73,7 @@ namespace JobApplication.API.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task UpdateVacancyAsync(int id, Vacancy vacancy)
+        public async Task UpdateJobPostAsync(int id, Vacancy vacancy)
         {
             var vacancyToUpdate = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 

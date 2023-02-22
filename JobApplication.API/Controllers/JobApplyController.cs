@@ -8,18 +8,18 @@ namespace JobApplication.API.Controllers
     [Route("api/[controller]/[action]")]
     public class JobApplyController : Controller
     {
-        private readonly IJobApplicationRepository jobApplicationRepository;
+        private readonly IJobApplicationRepository _jobApplicationRepository;
 
         public JobApplyController(IJobApplicationRepository jobApplicationRepository)
         {
-            this.jobApplicationRepository = jobApplicationRepository;
+            this._jobApplicationRepository = jobApplicationRepository;
         }
 
         [HttpPost]
         [ActionName("JobApply")]
         public async Task<IActionResult> JobApply([FromQuery]int id, Candidate candidate)
         {
-            await jobApplicationRepository.ApplyForJob(id, candidate);
+            await _jobApplicationRepository.ApplyForJob(id, candidate);
 
             return Ok();
         }
@@ -28,14 +28,14 @@ namespace JobApplication.API.Controllers
         [ActionName("GetAllCandidatesPerVacancy")]
         public async Task<IActionResult> GetAllCandidatesPerVacancy(int vacancyId)
         {
-            return Ok(await jobApplicationRepository.GetCandidatesByVacancyId(vacancyId));
+            return Ok(await _jobApplicationRepository.GetCandidatesByVacancyId(vacancyId));
         }
 
         [HttpGet]
         [ActionName("GetAllVacanciesPerUser")]
         public async Task<IActionResult> GetAllVacanciesPerUser(int userId)
         {
-            return Ok(await jobApplicationRepository.GetVacanciesByUserId(userId));
+            return Ok(await _jobApplicationRepository.GetVacanciesByUserId(userId));
         }
     }
 }
