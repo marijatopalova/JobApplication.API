@@ -45,7 +45,7 @@ namespace JobApplication.API.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Vacancy>> GetVacanciesByUserId(int userId)
+        public async Task<IEnumerable<JobPost>> GetVacanciesByUserId(int userId)
         {
             var vacancyIds = context.JobApplicants.Where(x => x.CandidateId == userId).Select(x => x.VacancyId);
 

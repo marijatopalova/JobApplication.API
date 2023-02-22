@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobApplication.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class JobPostController : Controller
     {
         private readonly IJobPostRepository _jobPostRepository;
@@ -16,25 +16,29 @@ namespace JobApplication.API.Controllers
         }
 
         [HttpGet]
+        [ActionName("GetAllJobPostsAsync")]
         public async Task<IActionResult> GetAllJobPostsAsync()
         {
             return Ok(await _jobPostRepository.GetAllAsync());
         }
 
         [HttpGet]
+        [ActionName("GetAllActiveJobPostsAsync")]
         public async Task<IActionResult> GetAllActiveJobPostsAsync()
         {
             return Ok(await _jobPostRepository.GetActiveJobPostsAsync());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateJobPostAsync(Vacancy vacancy)
+        [ActionName("CreateJobPostAsync")]
+        public async Task<IActionResult> CreateJobPostAsync(JobPost vacancy)
         {
             await _jobPostRepository.AddJobPostAsync(vacancy);
             return Ok(vacancy);
         }
 
         [HttpDelete]
+        [ActionName("DeleteJobPostAsync")]
         public async Task<IActionResult> DeleteJobPostAsync(int id)
         {
             await _jobPostRepository.DeleteJobPostAsync(id);
@@ -42,13 +46,15 @@ namespace JobApplication.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateJobPostAsync(int id, Vacancy vacancy)
+        [ActionName("UpdateJobPostAsync")]
+        public async Task<IActionResult> UpdateJobPostAsync(int id, JobPost vacancy)
         {
             await _jobPostRepository.UpdateJobPostAsync(id, vacancy);
             return Ok();
         }
 
         [HttpPatch]
+        [ActionName("CloseJobPostAsync")]
         public async Task<IActionResult> CloseJobPostAsync(int id)
         {
             await _jobPostRepository.CloseJobPostAsync(id);

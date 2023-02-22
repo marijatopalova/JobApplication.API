@@ -9,7 +9,7 @@ namespace JobApplication.API.Models
         public int VacancyId { get; set; }
 
         [ForeignKey("VacancyId")]
-        public virtual Vacancy? Vacancy { get; set; }
+        public virtual JobPost? Vacancy { get; set; }
 
         public int CandidateId { get; set; }
 

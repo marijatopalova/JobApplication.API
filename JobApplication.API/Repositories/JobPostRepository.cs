@@ -13,9 +13,9 @@ namespace JobApplication.API.Repositories
             this.context = context;
         }
 
-        public async Task AddJobPostAsync(Vacancy vacancy)
+        public async Task AddJobPostAsync(JobPost vacancy)
         {
-            var vacancyToAdd = new Vacancy();
+            var vacancyToAdd = new JobPost();
             vacancyToAdd.PositionName = vacancy.PositionName;
             vacancyToAdd.Description = vacancy.Description;
             vacancyToAdd.CompanyName = vacancy.CompanyName;
@@ -49,17 +49,17 @@ namespace JobApplication.API.Repositories
             await SaveChangesAsync();
         }
 
-        public Task<List<Vacancy>> GetActiveJobPostsAsync()
+        public Task<List<JobPost>> GetActiveJobPostsAsync()
         {
             return context.Vacancies.Where(x => x.ActiveStatus == JobPostStatus.Active).ToListAsync();
         }
 
-        public async Task<List<Vacancy>> GetAllAsync()
+        public async Task<List<JobPost>> GetAllAsync()
         {
             return await context.Vacancies.Include(v => v.Industry).ToListAsync();
         }
 
-        public async Task<Vacancy> GetJobPostByIdAsync(int id)
+        public async Task<JobPost> GetJobPostByIdAsync(int id)
         {
             var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 
@@ -73,7 +73,7 @@ namespace JobApplication.API.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task UpdateJobPostAsync(int id, Vacancy vacancy)
+        public async Task UpdateJobPostAsync(int id, JobPost vacancy)
         {
             var vacancyToUpdate = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
 

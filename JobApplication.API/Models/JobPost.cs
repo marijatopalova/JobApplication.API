@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobApplication.API.Models
 {
-    public class Vacancy
+    public class JobPost
     {
         public int Id { get; set; }
 
