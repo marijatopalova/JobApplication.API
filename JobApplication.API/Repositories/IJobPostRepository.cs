@@ -7,8 +7,8 @@ namespace JobApplication.API.Repositories
         Task<List<JobPost>> GetAllAsync();
         Task<JobPost> GetJobPostByIdAsync(int id);
         Task<List<JobPost>> GetActiveJobPostsAsync();
-        Task AddJobPostAsync(JobPost vacancy);
-        Task UpdateJobPostAsync(int id, JobPost vacancy);
+        Task AddJobPostAsync(JobPost jobPost);
+        Task UpdateJobPostAsync(int id, JobPost jobPost);
         Task DeleteJobPostAsync(int id);
         Task SaveChangesAsync();
         Task CloseJobPostAsync(int id);  

@@ -13,26 +13,26 @@ namespace JobApplication.API.Repositories
             this.context = context;
         }
 
-        public async Task AddJobPostAsync(JobPost vacancy)
+        public async Task AddJobPostAsync(JobPost jobPost)
         {
-            var vacancyToAdd = new JobPost();
-            vacancyToAdd.PositionName = vacancy.PositionName;
-            vacancyToAdd.Description = vacancy.Description;
-            vacancyToAdd.CompanyName = vacancy.CompanyName;
-            vacancyToAdd.Location = vacancy.Location;
-            vacancyToAdd.IsRemote = vacancy.IsRemote;
-            vacancyToAdd.SeniorityLevel = vacancy.SeniorityLevel;
-            vacancyToAdd.EmploymentType = vacancy.EmploymentType;
-            vacancyToAdd.ActiveStatus = JobPostStatus.Active;
-            vacancyToAdd.IndustryId = vacancy.IndustryId;
+            var jobPostToAdd = new JobPost();
+            jobPostToAdd.PositionName = jobPost.PositionName;
+            jobPostToAdd.Description = jobPost.Description;
+            jobPostToAdd.CompanyName = jobPost.CompanyName;
+            jobPostToAdd.Location = jobPost.Location;
+            jobPostToAdd.IsRemote = jobPost.IsRemote;
+            jobPostToAdd.SeniorityLevel = jobPost.SeniorityLevel;
+            jobPostToAdd.EmploymentType = jobPost.EmploymentType;
+            jobPostToAdd.ActiveStatus = JobPostStatus.Active;
+            jobPostToAdd.IndustryId = jobPost.IndustryId;
 
-            context.Add(vacancyToAdd);
+            context.Add(jobPostToAdd);
             await SaveChangesAsync();
         }
 
         public async Task CloseJobPostAsync(int id)
         {
-            var jobPost = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
+            var jobPost = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();
 
             jobPost.ActiveStatus = JobPostStatus.Closed;
 
@@ -41,31 +41,31 @@ namespace JobApplication.API.Repositories
 
         public async Task DeleteJobPostAsync(int id)
         {
-            var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
+            var jobPost = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();
 
-            if (vacancy != null)
-                context.Vacancies.Remove(vacancy);
+            if (jobPost != null)
+                context.JobPosts.Remove(jobPost);
 
             await SaveChangesAsync();
         }
 
         public Task<List<JobPost>> GetActiveJobPostsAsync()
         {
-            return context.Vacancies.Where(x => x.ActiveStatus == JobPostStatus.Active).ToListAsync();
+            return context.JobPosts.Where(x => x.ActiveStatus == JobPostStatus.Active).ToListAsync();
         }
 
         public async Task<List<JobPost>> GetAllAsync()
         {
-            return await context.Vacancies.Include(v => v.Industry).ToListAsync();
+            return await context.JobPosts.Include(v => v.Industry).ToListAsync();
         }
 
         public async Task<JobPost> GetJobPostByIdAsync(int id)
         {
-            var vacancy = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
+            var jobPost = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();
 
-            if (vacancy == null) return null;
+            if (jobPost == null) return null;
 
-            return vacancy;
+            return jobPost;
         }
 
         public async Task SaveChangesAsync()
@@ -73,18 +73,18 @@ namespace JobApplication.API.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task UpdateJobPostAsync(int id, JobPost vacancy)
+        public async Task UpdateJobPostAsync(int id, JobPost jobPost)
         {
-            var vacancyToUpdate = await context.Vacancies.Where(v => v.Id == id).FirstOrDefaultAsync();
+            var jobPostToUpdate = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();
 
-            vacancyToUpdate.PositionName = vacancy.PositionName;
-            vacancyToUpdate.Description = vacancy.Description;
-            vacancyToUpdate.CompanyName = vacancy.CompanyName;
-            vacancyToUpdate.Location = vacancy.Location;
-            vacancyToUpdate.IsRemote = vacancy.IsRemote;
-            vacancyToUpdate.SeniorityLevel = vacancy.SeniorityLevel;
-            vacancyToUpdate.EmploymentType = vacancy.EmploymentType;
-            vacancyToUpdate.Industry = vacancy.Industry;
+            jobPostToUpdate.PositionName = jobPost.PositionName;
+            jobPostToUpdate.Description = jobPost.Description;
+            jobPostToUpdate.CompanyName = jobPost.CompanyName;
+            jobPostToUpdate.Location = jobPost.Location;
+            jobPostToUpdate.IsRemote = jobPost.IsRemote;
+            jobPostToUpdate.SeniorityLevel = jobPost.SeniorityLevel;
+            jobPostToUpdate.EmploymentType = jobPost.EmploymentType;
+            jobPostToUpdate.Industry = jobPost.Industry;
 
             await SaveChangesAsync();
         }

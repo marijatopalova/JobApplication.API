@@ -10,7 +10,7 @@ namespace JobApplication.API.Models
         }
 
         public DbSet<Candidate> Candidates { get; set; }
-        public DbSet<JobPost> Vacancies { get; set; }
+        public DbSet<JobPost> JobPosts { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<JobApplicant> JobApplicants { get; set; }
 

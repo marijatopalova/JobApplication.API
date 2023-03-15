@@ -20,7 +20,7 @@ namespace JobApplication.API.Repositories
 
         public async Task ApplyForJob(int jobId, Candidate candidate)
         {
-            var job = context.Vacancies.Where(x => x.Id == jobId).FirstOrDefault();
+            var job = context.JobPosts.Where(x => x.Id == jobId).FirstOrDefault();
 
             if (job == null || job.ActiveStatus == JobPostStatus.Closed)
             {
@@ -29,7 +29,7 @@ namespace JobApplication.API.Repositories
 
             var newJobApplicant = new JobApplicant
             {
-                VacancyId = jobId,
+                JobPostId = jobId,
                 Candidate = new Candidate
                 {
                     FirstName = candidate.FirstName,
@@ -45,16 +45,9 @@ namespace JobApplication.API.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<JobPost>> GetVacanciesByUserId(int userId)
+        public async Task<IEnumerable<Candidate>> GetCandidatesByJobPostId(int jobPostId)
         {
-            var vacancyIds = context.JobApplicants.Where(x => x.CandidateId == userId).Select(x => x.VacancyId);
-
-            return await context.Vacancies.Where(x => vacancyIds.Any(v => v.Equals(x.Id))).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Candidate>> GetCandidatesByVacancyId(int vacancyId)
-        {
-            var candidateIds = context.JobApplicants.Where(x => x.VacancyId == vacancyId).Select(x => x.CandidateId);
+            var candidateIds = context.JobApplicants.Where(x => x.JobPostId == jobPostId).Select(x => x.CandidateId);
 
             return await context.Candidates.Where(x => candidateIds.Any(v => v.Equals(x.Id))).ToListAsync();
         }

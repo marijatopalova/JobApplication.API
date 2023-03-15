@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobApplication.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class JobApplyController : Controller
     {
         private readonly IJobApplicationRepository _jobApplicationRepository;
@@ -15,27 +15,20 @@ namespace JobApplication.API.Controllers
             this._jobApplicationRepository = jobApplicationRepository;
         }
 
-        [HttpPost]
-        [ActionName("JobApply")]
-        public async Task<IActionResult> JobApply([FromQuery]int id, Candidate candidate)
+        // POST /api/jobapply/1
+        [HttpPost("{id:int}")]
+        public async Task<IActionResult> JobApply(int id, Candidate candidate)
         {
             await _jobApplicationRepository.ApplyForJob(id, candidate);
 
             return Ok();
         }
 
-        [HttpGet]
-        [ActionName("GetAllCandidatesPerVacancy")]
-        public async Task<IActionResult> GetAllCandidatesPerVacancy(int vacancyId)
+        // GET /api/jobapply/1
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAllCandidatesPerJobPost(int id)
         {
-            return Ok(await _jobApplicationRepository.GetCandidatesByVacancyId(vacancyId));
-        }
-
-        [HttpGet]
-        [ActionName("GetAllVacanciesPerUser")]
-        public async Task<IActionResult> GetAllVacanciesPerUser(int userId)
-        {
-            return Ok(await _jobApplicationRepository.GetVacanciesByUserId(userId));
+            return Ok(await _jobApplicationRepository.GetCandidatesByJobPostId(id));
         }
     }
 }
