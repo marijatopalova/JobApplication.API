@@ -9,6 +9,7 @@ import { AddJobpostComponent } from './components/job-post/add-jobpost/add-jobpo
 import { UpdateJobpostComponent } from './components/job-post/update-jobpost/update-jobpost.component';
 import { KeysPipe } from './pipes/keys.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
