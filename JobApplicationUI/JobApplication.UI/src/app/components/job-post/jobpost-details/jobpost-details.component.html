@@ -5,10 +5,9 @@
         <p>{{ jobPost.companyName }}</p>
         <p>{{ jobPost.location }}</p>
         <p>{{ jobPost.description }}</p>
-        <p>{{ jobPost.seniorityLevel }}</p>
-        <p>{{ jobPost.activeStatus }}</p>
-        <p>{{ jobPost.employmentType }}</p>
-        <p>{{ jobPost.industry.name }}</p>
+        <p>{{ jobPost.seniorityLevel | seniorityLevel}}</p>
+        <p>{{ jobPost.employmentType | employmentType }}</p>
+        <p>{{ jobPost.industryId }}</p>
         <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'edit', jobPost.id]">Edit</button> |
         <button type="button" class="btn btn-danger" (click)="deleteJobPost(jobPost.id)">Delete</button>
       </div>

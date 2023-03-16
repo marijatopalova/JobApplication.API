@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { JobPost } from 'src/app/models/job-post.model';
+import { JobPostService } from 'src/app/services/job-post.service';
 
 @Component({
   selector: 'app-jobpost-details',
@@ -9,24 +11,38 @@ import { JobPost } from 'src/app/models/job-post.model';
 export class JobpostDetailsComponent implements OnInit{
   
   jobPost: JobPost = {
-    id: 1,
-    positionName: 'C# developer',
-    description: 'Senior C# developer with more than 5 years of relevant experience.',
-    companyName: 'XyzSoft',
-    location: 'Ontario, Canada',
+    id: 0,
+    positionName: '',
+    description: '',
+    companyName: '',
+    location: '',
     isRemote: false,
-    seniorityLevel: 'Senior',
-    employmentType: 'Full Time',
-    activeStatus: 'Active',
-    industryId: 1,
+    seniorityLevel: '',
+    employmentType: '',
+    activeStatus: '',
+    industryId: 0,
     industry: {
-      id: 1,
-      name: 'Information and Technology'
+      id: 0,
+      name: ''
     }
   }
-  constructor() {}
+
+  jobPostId: number = 0;
+
+  constructor(public jobPostService: JobPostService, 
+    private route: ActivatedRoute) {
+    }
 
   ngOnInit(): void {
+
+    this.jobPostId = this.route.snapshot.params['id'];
+
+    this.jobPostService.getJobPostDetails(this.jobPostId)
+    .subscribe({
+      next: (result) => {
+        this.jobPost = <JobPost>result;
+      }
+    })
   }
 
   deleteJobPost(id: number) {

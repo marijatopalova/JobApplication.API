@@ -37,6 +37,14 @@ namespace JobApplication.API.Controllers
             return Ok(jobPost);
         }
 
+        // GET /api/jobposts/1
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetJobPostDetailsAsync(int id)
+        {
+            var jobPost = await _jobPostRepository.GetJobPostByIdAsync(id);
+            return Ok(jobPost);
+        }
+
         // DELETE /api/jobposts/1
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteJobPostAsync(int id)
@@ -63,7 +71,7 @@ namespace JobApplication.API.Controllers
 
         // GET /api/jobposts/industries
         [HttpGet("industries")]
-        public async Task<IActionResult> GetAllIndustries()
+        public async Task<IActionResult> GetAllIndustriesAsync()
         {
             var industriesList = await _jobPostRepository.GetIndustries();
             return Ok(industriesList);

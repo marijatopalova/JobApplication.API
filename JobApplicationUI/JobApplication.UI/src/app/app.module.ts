@@ -10,6 +10,8 @@ import { UpdateJobpostComponent } from './components/job-post/update-jobpost/upd
 import { KeysPipe } from './pipes/keys.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SeniorityLevelPipe } from './pipes/seniorityLevel.pipe';
+import { EmploymentTypePipe } from './pipes/employmentType.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     JobpostDetailsComponent,
     AddJobpostComponent,
     UpdateJobpostComponent,
-    KeysPipe
+    KeysPipe,
+    SeniorityLevelPipe,
+    EmploymentTypePipe,
   ],
   imports: [
     BrowserModule,
