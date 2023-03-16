@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmploymentType } from 'src/app/enums/employment-type.enum';
 import { SeniorityLevel } from 'src/app/enums/seniority-level.enum';
 import { Industry } from 'src/app/models/industry.model';
+import { JobPostService } from 'src/app/services/job-post.service';
 
 @Component({
   selector: 'app-add-jobpost',
@@ -16,13 +17,9 @@ export class AddJobpostComponent implements OnInit {
   seniorityLevels = SeniorityLevel;
   employmentTypes = EmploymentType;
 
-  industries: Industry[] = [
-    { id: 1, name: 'Information Technology'},
-    { id: 2, name: 'Digital Marketing'},
-    { id: 3, name: 'Human Resources'},
-  ]
+  industries: Industry[] = [];
 
-  constructor() {
+  constructor(public jobPostService: JobPostService) {
     this.form = new FormGroup({
       positionName: new FormControl('', [Validators.required]),
       companyName: new FormControl('', [Validators.required]),
@@ -36,6 +33,12 @@ export class AddJobpostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.jobPostService.getIndustries()
+    .subscribe({
+      next: (result) => {
+        this.industries = result;
+      }
+    })
   }
 
 }

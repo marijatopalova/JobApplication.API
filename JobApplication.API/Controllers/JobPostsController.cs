@@ -50,7 +50,7 @@ namespace JobApplication.API.Controllers
         public async Task<IActionResult> UpdateJobPostAsync(int id, JobPost jobPost)
         {
             await _jobPostRepository.UpdateJobPostAsync(id, jobPost);
-            return Ok();
+            return Ok(jobPost);
         }
 
         // PATCH /api/jobposts/1
