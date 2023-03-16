@@ -59,6 +59,11 @@ namespace JobApplication.API.Repositories
             return await context.JobPosts.Include(v => v.Industry).ToListAsync();
         }
 
+        public async Task<List<Industry>> GetIndustries()
+        {
+            return await context.Industries.ToListAsync();
+        }
+
         public async Task<JobPost> GetJobPostByIdAsync(int id)
         {
             var jobPost = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();

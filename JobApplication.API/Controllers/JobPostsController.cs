@@ -60,5 +60,13 @@ namespace JobApplication.API.Controllers
             await _jobPostRepository.CloseJobPostAsync(id);
             return Ok();
         }
+
+        // GET /api/jobposts/industries
+        [HttpGet("industries")]
+        public async Task<IActionResult> GetAllIndustries()
+        {
+            var industriesList = await _jobPostRepository.GetIndustries();
+            return Ok(industriesList);
+        }
     }
 }
