@@ -1,0 +1,94 @@
+<div class="container job-form">
+
+    <h1>Edit Job Post</h1>
+
+    <form [formGroup]="form">
+        <div class="mb-3">
+          <label for="positionName" class="form-label">Position Name</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          id="positionName"
+          formControlName="positionName">
+            <div *ngIf="form.controls['positionName'].touched && form.controls['positionName'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['positionName'].errors?.['required']">Position Name is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="companyName" class="form-label">Company Name</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="companyName"
+            formControlName="companyName">
+            <div *ngIf="form.controls['companyName'].touched && form.controls['companyName'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['companyName'].errors?.['required']">Company Name is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="location"
+            formControlName="location">
+            <div *ngIf="form.controls['location'].touched && form.controls['location'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['location'].errors?.['required']">Location is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="description"
+            formControlName="description">
+            <div *ngIf="form.controls['description'].touched && form.controls['description'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['description'].errors?.['required']">Description is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" formControlName="seniorityLevel">
+                <option selected value="">Seniority Level</option>
+                <option *ngFor="let seniorityLevel of seniorityLevels | keys" [value]="seniorityLevel.key">
+                    {{ seniorityLevel.value }}</option>
+            </select>
+            <div *ngIf="form.controls['seniorityLevel'].touched && form.controls['seniorityLevel'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['seniorityLevel'].errors?.['required']">Seniority Level is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" formControlName="employmentType">
+                <option selected value="">Employment Type</option>
+                <option *ngFor="let employmentType of employmentTypes | keys" [value]="employmentType.key">
+                    {{ employmentType.value }}</option>
+            </select>
+            <div *ngIf="form.controls['employmentType'].touched && form.controls['employmentType'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['employmentType'].errors?.['required']">Employment Type is required.</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" formControlName="industry">
+                <option selected value="">Industry</option>
+                <option *ngFor="let industry of industries" [value]="industry.id">
+                    {{ industry.name }}</option>
+            </select>
+            <div *ngIf="form.controls['industry'].touched && form.controls['industry'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['industry'].errors?.['required']">Industry is required.</div>
+            </div>
+        </div>
+          
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="isRemote">
+            <label class="form-check-label" for="isRemote">Is Remote</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+</div>

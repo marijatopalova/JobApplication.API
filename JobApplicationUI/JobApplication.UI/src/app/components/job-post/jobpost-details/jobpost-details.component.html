@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h1>{{ jobPost.positionName }}</h1>
+        <p>{{ jobPost.companyName }}</p>
+        <p>{{ jobPost.location }}</p>
+        <p>{{ jobPost.description }}</p>
+        <p>{{ jobPost.seniorityLevel }}</p>
+        <p>{{ jobPost.activeStatus }}</p>
+        <p>{{ jobPost.employmentType }}</p>
+        <p>{{ jobPost.industry.name }}</p>
+        <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'edit', jobPost.id]">Edit</button> |
+        <button type="button" class="btn btn-danger" (click)="deleteJobPost(jobPost.id)">Delete</button>
+      </div>
+    </div>
+  </div>

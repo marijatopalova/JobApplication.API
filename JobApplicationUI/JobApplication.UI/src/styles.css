@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.card {
+    padding: auto;
+    margin: 50px 50px 50px 50px;
+}
+
+.job-form {
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 50%;
+    margin-top: 10px;
+}
