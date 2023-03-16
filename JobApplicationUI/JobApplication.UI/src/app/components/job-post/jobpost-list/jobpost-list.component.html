@@ -4,7 +4,6 @@
       <h1>{{ jobPost.positionName }}</h1>
       <p>{{ jobPost.companyName }}</p>
       <p>{{ jobPost.location }}</p>
-      <p>{{ jobPost.description }}</p>
       <p>{{ jobPost.seniorityLevel | seniorityLevel }}</p>
       <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button>
     </div>

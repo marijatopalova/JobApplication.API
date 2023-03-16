@@ -66,7 +66,10 @@ namespace JobApplication.API.Repositories
 
         public async Task<JobPost> GetJobPostByIdAsync(int id)
         {
-            var jobPost = await context.JobPosts.Where(v => v.Id == id).FirstOrDefaultAsync();
+            var jobPost = await context.JobPosts
+                .Include(x => x.Industry)
+                .Where(v => v.Id == id)
+                .FirstOrDefaultAsync();
 
             if (jobPost == null) return null;
 

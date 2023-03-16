@@ -1,4 +1,6 @@
-﻿using JobApplication.API.Models;
+﻿using AutoMapper;
+using JobApplication.API.DTOs.Responses;
+using JobApplication.API.Models;
 using JobApplication.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +11,28 @@ namespace JobApplication.API.Controllers
     public class JobPostsController : Controller
     {
         private readonly IJobPostRepository _jobPostRepository;
+        private readonly IMapper _mapper;
 
-        public JobPostsController(IJobPostRepository jobPostRepository)
+        public JobPostsController(IJobPostRepository jobPostRepository, IMapper mapper)
         {
             this._jobPostRepository = jobPostRepository;
+            this._mapper = mapper;
         }
 
         // GET /api/jobposts
         [HttpGet("")]
-        public async Task<IActionResult> GetAllJobPostsAsync()
+        public async Task<ActionResult<List<JobPostResponse>>> GetAllJobPostsAsync()
         {
-            return Ok(await _jobPostRepository.GetAllAsync());
+            var jobPostList = await _jobPostRepository.GetAllAsync();
+
+            List<JobPostResponse> response = new ();
+
+            foreach (var jobPost in jobPostList)
+            {
+                response.Add (_mapper.Map<JobPostResponse>(jobPost));
+            }
+
+            return Ok(response);
         }
 
         // GET /api/jobposts/active
@@ -39,10 +52,25 @@ namespace JobApplication.API.Controllers
 
         // GET /api/jobposts/1
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetJobPostDetailsAsync(int id)
+        public async Task<ActionResult<JobPostResponse>> GetJobPostDetailsAsync(int id)
         {
             var jobPost = await _jobPostRepository.GetJobPostByIdAsync(id);
-            return Ok(jobPost);
+
+            JobPostResponse response = new()
+            {
+                Id = jobPost.Id,
+                PositionName = jobPost.PositionName,
+                Description = jobPost.Description,
+                Location = jobPost.Location,
+                CompanyName = jobPost.CompanyName,
+                SeniorityLevel = jobPost.SeniorityLevel,
+                EmploymentType = jobPost.EmploymentType,
+                ActiveStatus = jobPost.ActiveStatus,
+                IsRemote = jobPost.IsRemote,
+                IndustryName = jobPost.Industry.Name
+            };
+
+            return Ok(response);
         }
 
         // DELETE /api/jobposts/1

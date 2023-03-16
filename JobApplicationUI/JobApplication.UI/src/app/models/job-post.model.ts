@@ -10,6 +10,5 @@ export interface JobPost {
     seniorityLevel: string;
     employmentType: string;
     activeStatus: string;
-    industryId: number;
-    industry: Industry;
+    industryName: string;
 }

@@ -20,11 +20,7 @@ export class JobpostDetailsComponent implements OnInit{
     seniorityLevel: '',
     employmentType: '',
     activeStatus: '',
-    industryId: 0,
-    industry: {
-      id: 0,
-      name: ''
-    }
+    industryName: ''
   }
 
   jobPostId: number = 0;
