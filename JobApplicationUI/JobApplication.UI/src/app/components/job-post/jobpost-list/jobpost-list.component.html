@@ -1,6 +1,6 @@
 <div class="container" *ngIf="jobPosts && jobPosts.length > 0">
   <div class="card" *ngFor="let jobPost of jobPosts">
-    <div class="card-body">
+    <div class="card-body" [class.closed]="jobPost.activeStatus == '1'">
       <h1>{{ jobPost.positionName }}</h1>
       <p>{{ jobPost.companyName }}</p>
       <p>{{ jobPost.location }}</p>

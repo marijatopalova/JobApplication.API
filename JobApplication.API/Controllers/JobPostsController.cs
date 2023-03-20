@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobApplication.API.DTOs.Requests;
 using JobApplication.API.DTOs.Responses;
 using JobApplication.API.Models;
 using JobApplication.API.Repositories;
@@ -23,54 +24,38 @@ namespace JobApplication.API.Controllers
         [HttpGet("")]
         public async Task<ActionResult<List<JobPostResponse>>> GetAllJobPostsAsync()
         {
-            var jobPostList = await _jobPostRepository.GetAllAsync();
+            var jobPostList = _mapper.Map<List<JobPost>, List<JobPostResponse>>(await _jobPostRepository.GetAllAsync());
 
-            List<JobPostResponse> response = new ();
-
-            foreach (var jobPost in jobPostList)
-            {
-                response.Add (_mapper.Map<JobPostResponse>(jobPost));
-            }
-
-            return Ok(response);
+            return Ok(jobPostList);
         }
 
         // GET /api/jobposts/active
         [HttpGet("active")]
         public async Task<IActionResult> GetAllActiveJobPostsAsync()
         {
-            return Ok(await _jobPostRepository.GetActiveJobPostsAsync());
+            var activeJobPosts = await _jobPostRepository.GetActiveJobPostsAsync();
+
+            return Ok(activeJobPosts);
         }
 
         // POST /api/jobposts
         [HttpPost]
-        public async Task<IActionResult> CreateJobPostAsync(JobPost jobPost)
+        public async Task<ActionResult<JobPostResponse>> CreateJobPostAsync(CreateJobPostRequest request)
         {
+            JobPost jobPost = _mapper.Map<CreateJobPostRequest, JobPost>(request);
+
             await _jobPostRepository.AddJobPostAsync(jobPost);
-            return Ok(jobPost);
+
+            return Ok(_mapper.Map<JobPost, JobPostResponse>(jobPost));
         }
 
         // GET /api/jobposts/1
         [HttpGet("{id:int}")]
         public async Task<ActionResult<JobPostResponse>> GetJobPostDetailsAsync(int id)
         {
-            var jobPost = await _jobPostRepository.GetJobPostByIdAsync(id);
+            var jobPost = _mapper.Map<JobPost, JobPostResponse>(await _jobPostRepository.GetJobPostByIdAsync(id));
 
-            JobPostResponse response = new()
-            {
-                Id = jobPost.Id,
-                PositionName = jobPost.PositionName,
-                Description = jobPost.Description,
-                Location = jobPost.Location,
-                CompanyName = jobPost.CompanyName,
-                SeniorityLevel = jobPost.SeniorityLevel,
-                EmploymentType = jobPost.EmploymentType,
-                ActiveStatus = jobPost.ActiveStatus,
-                IsRemote = jobPost.IsRemote,
-                IndustryName = jobPost.Industry.Name
-            };
-
-            return Ok(response);
+            return Ok(jobPost);
         }
 
         // DELETE /api/jobposts/1
@@ -83,10 +68,13 @@ namespace JobApplication.API.Controllers
 
         // PUT /api/jobposts/1
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateJobPostAsync(int id, JobPost jobPost)
+        public async Task<IActionResult> UpdateJobPostAsync(int id, UpdateJobPostRequest request)
         {
+            JobPost jobPost = _mapper.Map<UpdateJobPostRequest, JobPost>(request);
+
             await _jobPostRepository.UpdateJobPostAsync(id, jobPost);
-            return Ok(jobPost);
+
+            return Ok(_mapper.Map<JobPost, JobPostResponse>(jobPost));
         }
 
         // PATCH /api/jobposts/1

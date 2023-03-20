@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card">
+    <div class="card" [class.closed]="jobPost.activeStatus == '1'">
       <div class="card-body">
         <h1>{{ jobPost.positionName }}</h1>
         <p>{{ jobPost.companyName }}</p>
@@ -8,8 +8,18 @@
         <p>{{ jobPost.seniorityLevel | seniorityLevel}}</p>
         <p>{{ jobPost.employmentType | employmentType }}</p>
         <p>{{ jobPost.industryName }}</p>
-        <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'edit', jobPost.id]">Edit</button> |
-        <button type="button" class="btn btn-danger" (click)="deleteJobPost(jobPost.id)">Delete</button>
+        <button 
+        type="button" 
+        class="btn btn-primary" 
+        [routerLink]="['/jobposts', 'edit', jobPost.id]" 
+        [disabled]="jobPost.activeStatus == '1'">
+        Edit</button> |
+        <button 
+        type="button" 
+        class="btn btn-danger" 
+        (click)="deleteJobPost(jobPost.id)" 
+        [disabled]="jobPost.activeStatus == '1'">
+        Delete</button>
       </div>
     </div>
   </div>

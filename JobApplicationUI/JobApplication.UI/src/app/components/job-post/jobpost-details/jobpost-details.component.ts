@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JobPost } from 'src/app/models/job-post.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobPostResponse } from 'src/app/models/job-post.model';
 import { JobPostService } from 'src/app/services/job-post.service';
 
 @Component({
@@ -10,23 +10,25 @@ import { JobPostService } from 'src/app/services/job-post.service';
 })
 export class JobpostDetailsComponent implements OnInit{
   
-  jobPost: JobPost = {
+  jobPost: JobPostResponse = {
     id: 0,
     positionName: '',
-    description: '',
     companyName: '',
     location: '',
-    isRemote: false,
+    description: '',
     seniorityLevel: '',
     employmentType: '',
+    industryId: 0,
+    industryName: '',
     activeStatus: '',
-    industryName: ''
+    isRemote: false
   }
 
   jobPostId: number = 0;
 
   constructor(public jobPostService: JobPostService, 
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
     }
 
   ngOnInit(): void {
@@ -36,13 +38,23 @@ export class JobpostDetailsComponent implements OnInit{
     this.jobPostService.getJobPostDetails(this.jobPostId)
     .subscribe({
       next: (result) => {
-        this.jobPost = <JobPost>result;
+        this.jobPost = result;
       }
     })
   }
 
   deleteJobPost(id: number) {
-    
+    this.jobPostService.deleteJobPost(id)
+    .subscribe({
+      next: () => {
+        if(confirm("Are you sure you want to delete this post?")) {
+          this.router.navigate(['jobposts']);
+        }
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 
 }

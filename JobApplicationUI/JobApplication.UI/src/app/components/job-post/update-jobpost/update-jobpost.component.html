@@ -1,8 +1,8 @@
 <div class="container job-form">
 
-    <h1>Edit Job Post</h1>
+    <h1>Edit Job Post</h1> 
 
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="updateJobPost()">
         <div class="mb-3">
           <label for="positionName" class="form-label">Position Name</label>
           <input 
@@ -74,21 +74,21 @@
         </div>
 
         <div class="mb-3">
-            <select class="form-select" formControlName="industry">
+            <select class="form-select" formControlName="industryId">
                 <option selected value="">Industry</option>
                 <option *ngFor="let industry of industries" [value]="industry.id">
                     {{ industry.name }}</option>
             </select>
-            <div *ngIf="form.controls['industry'].touched && form.controls['industry'].invalid" class="alert alert-danger">
-                <div *ngIf="form.controls['industry'].errors?.['required']">Industry is required.</div>
+            <div *ngIf="form.controls['industryId'].touched && form.controls['industryId'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['industryId'].errors?.['required']">Industry is required.</div>
             </div>
         </div>
           
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="isRemote">
+            <input type="checkbox" class="form-check-input" id="isRemote" formControlName="isRemote">
             <label class="form-check-label" for="isRemote">Is Remote</label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </form>
 </div>

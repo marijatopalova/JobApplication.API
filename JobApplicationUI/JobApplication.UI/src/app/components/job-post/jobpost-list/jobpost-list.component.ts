@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmploymentType } from 'src/app/enums/employment-type.enum';
 import { JobPostStatus } from 'src/app/enums/jobpost-status.enum';
 import { SeniorityLevel } from 'src/app/enums/seniority-level.enum';
-import { JobPost } from 'src/app/models/job-post.model';
+import { JobPostResponse } from 'src/app/models/job-post.model';
 import { JobPostService } from 'src/app/services/job-post.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { JobPostService } from 'src/app/services/job-post.service';
 })
 export class JobpostListComponent implements OnInit {
 
-  jobPosts: JobPost[] = [];
+  jobPosts: JobPostResponse[] = [];
 
   constructor(public jobPostService: JobPostService) {}
 

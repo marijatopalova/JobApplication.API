@@ -1,8 +1,7 @@
-﻿namespace JobApplication.API.DTOs.Responses
+﻿namespace JobApplication.API.DTOs.Requests
 {
-    public class JobPostResponse
+    public class UpdateJobPostRequest
     {
-        public int Id { get; set; }
         public string PositionName { get; set; }
 
         public string Description { get; set; }
@@ -17,10 +16,6 @@
 
         public string EmploymentType { get; set; }
 
-        public string ActiveStatus { get; set; }
-
         public int IndustryId { get; set; }
-
-        public string IndustryName { get; set; }
     }
 }
