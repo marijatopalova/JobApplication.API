@@ -68,7 +68,7 @@ namespace JobApplication.API.Controllers
 
         // PUT /api/jobposts/1
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateJobPostAsync(int id, UpdateJobPostRequest request)
+        public async Task<ActionResult<JobPostResponse>> UpdateJobPostAsync(int id, UpdateJobPostRequest request)
         {
             JobPost jobPost = _mapper.Map<UpdateJobPostRequest, JobPost>(request);
 
