@@ -6,7 +6,7 @@ namespace JobApplication.API.Repositories
     {
         Task ApplyForJob(int jobId, Candidate candidate);
 
-        Task<IEnumerable<Candidate>> GetCandidatesByJobPostId(int jobPostId);
+        Task<List<Candidate>> GetCandidatesByJobPostId(int jobPostId);
 
         Task SaveChangesAsync();
     }

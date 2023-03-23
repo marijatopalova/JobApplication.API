@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SeniorityLevelPipe } from './pipes/seniorityLevel.pipe';
 import { EmploymentTypePipe } from './pipes/employmentType.pipe';
+import { AddCandidateComponent } from './components/job-apply/add-candidate/add-candidate.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EmploymentTypePipe } from './pipes/employmentType.pipe';
     KeysPipe,
     SeniorityLevelPipe,
     EmploymentTypePipe,
+    AddCandidateComponent
   ],
   imports: [
     BrowserModule,

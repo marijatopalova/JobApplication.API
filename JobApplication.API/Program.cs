@@ -1,4 +1,5 @@
 using JobApplication.API.Models;
+using JobApplication.API.Profiles;
 using JobApplication.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IJobPostRepository, JobPostRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(JobPostProfile));
+builder.Services.AddAutoMapper(typeof(JobApplyProfile));
 
 var app = builder.Build();
 

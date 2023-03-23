@@ -1,0 +1,63 @@
+<div class="container job-form">
+
+    <h3>Apply for {{ jobPostName }}</h3>
+    <hr>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          id="firstName"
+          formControlName="firstName">
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="lastName"
+            formControlName="lastName">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="email"
+            formControlName="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="phone"
+            formControlName="phone">
+        </div>
+
+        <div class="mb-3">
+            <label for="yearsOfExperience" class="form-label">Years of Experience</label>
+            <input 
+            type="number" 
+            class="form-control" 
+            id="yearsOfExperience"
+            formControlName="yearsOfExperience">
+        </div>
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea 
+            class="form-control"
+            id="message"
+            formControlName="message"
+            ></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Apply</button>
+      </form>
+</div>

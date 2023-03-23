@@ -2,6 +2,7 @@
     <div class="card" [class.closed]="jobPost.activeStatus == '1'">
       <div class="card-body">
         <h1>{{ jobPost.positionName }}</h1>
+        <p><b>Candidates: {{ candidatesNumber }}</b></p>
         <p>{{ jobPost.companyName }}</p>
         <p>{{ jobPost.location }}</p>
         <p>{{ jobPost.description }}</p>

@@ -5,7 +5,8 @@
       <p>{{ jobPost.companyName }}</p>
       <p>{{ jobPost.location }}</p>
       <p>{{ jobPost.seniorityLevel | seniorityLevel }}</p>
-      <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
+      <button type="button" class="btn btn-primary" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
     </div>
   </div>
 </div>

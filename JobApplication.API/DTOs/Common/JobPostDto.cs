@@ -15,6 +15,7 @@
         public string SeniorityLevel { get; set; }
 
         public string EmploymentType { get; set; }
+
         public int IndustryId { get; set; }
     }
 }

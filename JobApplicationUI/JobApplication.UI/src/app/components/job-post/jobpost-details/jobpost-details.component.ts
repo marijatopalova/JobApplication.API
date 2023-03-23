@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobPostResponse } from 'src/app/models/job-post.model';
+import { JobApplyService } from 'src/app/services/job-apply.service';
 import { JobPostService } from 'src/app/services/job-post.service';
 
 @Component({
@@ -24,9 +25,12 @@ export class JobpostDetailsComponent implements OnInit{
     isRemote: false
   }
 
+  candidatesNumber: number = 0;
+
   jobPostId: number = 0;
 
   constructor(public jobPostService: JobPostService, 
+    public jobApplyService: JobApplyService,
     private route: ActivatedRoute,
     private router: Router) {
     }
@@ -41,6 +45,13 @@ export class JobpostDetailsComponent implements OnInit{
         this.jobPost = result;
       }
     })
+
+    this.jobApplyService.getAllCandidatesPerJobPost(this.jobPostId)
+    .subscribe({
+      next: (result) => {
+        this.candidatesNumber = result.length;
+      }
+    });
   }
 
   deleteJobPost(id: number) {

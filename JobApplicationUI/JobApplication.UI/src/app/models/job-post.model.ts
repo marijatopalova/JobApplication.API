@@ -1,8 +1,3 @@
-import { EmploymentType } from "../enums/employment-type.enum";
-import { JobPostStatus } from "../enums/jobpost-status.enum";
-import { SeniorityLevel } from "../enums/seniority-level.enum";
-import { Industry } from "./industry.model";
-
 export interface JobPostResponse {
     id: number;
     positionName: string;
