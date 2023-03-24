@@ -26,13 +26,6 @@ export class JobpostListComponent implements OnInit {
         this.jobPosts = result;
       }
     });
-
-    this.jobPosts.forEach(x => this.jobApplyService.getAllCandidatesPerJobPost(x.id)
-    .subscribe({
-      next: (result) => {
-        this.candidatesNumber = result.length;
-      }
-    }))
   }
 
 }
