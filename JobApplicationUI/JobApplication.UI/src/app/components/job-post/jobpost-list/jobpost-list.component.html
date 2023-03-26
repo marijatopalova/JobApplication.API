@@ -1,12 +1,14 @@
 <div class="container" *ngIf="jobPosts && jobPosts.length > 0">
   <div class="card" *ngFor="let jobPost of jobPosts">
-    <div class="card-body" [class.closed]="jobPost.activeStatus == '1'">
-      <h1>{{ jobPost.positionName }}</h1>
-      <p>{{ jobPost.companyName }}</p>
-      <p>{{ jobPost.location }}</p>
-      <p>{{ jobPost.seniorityLevel | seniorityLevel }}</p>
-      <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
-      <button type="button" class="btn btn-primary" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
+    <div [class.closed]="jobPost.activeStatus == '1'">
+      <h5 class="card-header">{{ jobPost.positionName }}</h5>
+      <div class="card-body">
+        <h6 class="card-title">{{ jobPost.companyName }}</h6>
+        <p class="card-text">{{ jobPost.location }}</p>
+        <p class="card-text">{{ jobPost.seniorityLevel | seniorityLevel }}</p>
+        <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
+        <button type="button" class="btn btn-primary" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
+      </div>
     </div>
   </div>
 </div>
