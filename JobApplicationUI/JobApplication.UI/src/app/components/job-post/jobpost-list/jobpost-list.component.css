@@ -3,3 +3,19 @@
     text-align: center;
     padding: 20px;
 }
+
+.card {
+    width: 350px;
+    height: 230px;
+    background: rgba(245, 245, 245, 0.6);
+    border-color: rgba(245, 245, 245, 0.6);
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.55);
+    transition: 0.2s ease-in-out;
+}
+  
+.card:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+  
