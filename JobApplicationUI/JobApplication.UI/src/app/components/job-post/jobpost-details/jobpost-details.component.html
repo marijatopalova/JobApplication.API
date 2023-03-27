@@ -11,13 +11,13 @@
         <p>{{ jobPost.industryName }}</p>
         <button 
         type="button" 
-        class="btn btn-primary" 
+        class="button-submit" 
         [routerLink]="['/jobposts', 'edit', jobPost.id]" 
         [disabled]="jobPost.activeStatus == '1'">
         Edit</button> |
         <button 
         type="button" 
-        class="btn btn-danger" 
+        class="button-delete" 
         (click)="deleteJobPost(jobPost.id)" 
         [disabled]="jobPost.activeStatus == '1'">
         Delete</button>

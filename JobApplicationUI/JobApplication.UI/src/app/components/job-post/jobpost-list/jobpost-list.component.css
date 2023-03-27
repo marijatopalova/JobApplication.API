@@ -2,6 +2,11 @@
 .no-records {
     text-align: center;
     padding: 20px;
+    width: 450px;
+    height: fit-content;
+    background: rgba(245, 245, 245, 0.6);
+    border-color: rgba(245, 245, 245, 0.6);
+    border-radius: 30px;
 }
 
 .card {

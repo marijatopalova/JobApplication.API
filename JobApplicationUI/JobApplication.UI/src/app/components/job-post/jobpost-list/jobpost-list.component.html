@@ -8,8 +8,8 @@
             <h6 class="card-title">{{ jobPost.companyName }}</h6>
             <p class="card-text">{{ jobPost.location }}</p>
             <p class="card-text">{{ jobPost.seniorityLevel | seniorityLevel }}</p>
-            <button type="button" class="btn btn-primary" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
-            <button type="button" class="btn btn-primary" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
+            <button type="button" class="button-submit" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
+            <button type="button" class="button-submit" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
           </div>
         </div>
       </div>
@@ -18,8 +18,11 @@
 </div>
 
 <div class="container" *ngIf="!jobPosts || jobPosts.length <= 0">
-  <div class="card no-records">
-    <p>No Job Posts Found</p>
+  <div class="row justify-content-center">
+    <div class="no-records">
+      <p>No Job Posts Found</p>
+    </div>
   </div>
 </div>
+
 
