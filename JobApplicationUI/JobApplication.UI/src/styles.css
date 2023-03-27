@@ -54,11 +54,29 @@ body {
     box-shadow: #5E5DF0 0 10px 20px -10px;
   }
 
-  .button-delete {
-    background: #cc3e3e;
-    box-shadow: #620404 0 10px 20px -10px;
-  }
+.button-delete {
+  background: #cc3e3e;
+  box-shadow: #620404 0 10px 20px -10px;
+}
 
-  img {
-    padding: 10px 10px 10px 10px;
-  }
+.button-info {
+  background: rgba(69, 67, 118, 0.653);
+  box-shadow: #231b34 0 10px 20px -10px;
+}
+
+.button:hover {
+  box-shadow: #555454 0 10px 20px -10px;
+}
+
+img {
+  padding: 10px 10px 10px 10px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.disabled-link {
+  pointer-events: none;
+  box-shadow: none;
+}

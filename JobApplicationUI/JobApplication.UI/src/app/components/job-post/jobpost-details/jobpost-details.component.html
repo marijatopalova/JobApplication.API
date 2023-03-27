@@ -2,7 +2,11 @@
     <div class="card" [class.closed]="jobPost.activeStatus == '1'">
       <div class="card-body">
         <h1>{{ jobPost.positionName }}</h1>
-        <a class="button button-submit" [routerLink]="['/candidates', jobPost.id]"><b>Candidates: {{ candidatesNumber }}</b></a>
+        <a 
+        class="button button-info"
+        [class.disabled-link]="candidatesNumber <= 0" 
+        [routerLink]="['/candidates', jobPost.id]">
+        <b>Candidates: {{ candidatesNumber }}</b></a>
         <hr>
         <p>{{ jobPost.companyName }}</p>
         <p>{{ jobPost.location }}</p>
