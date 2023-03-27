@@ -15,5 +15,7 @@ namespace JobApplication.API.DTOs.Responses
         public int YearsOfExperience { get; set; }
 
         public string Message { get; set; }
+
+        public DateTime DateOfApplication { get; set; }
     }
 }

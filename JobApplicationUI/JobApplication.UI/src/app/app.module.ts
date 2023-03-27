@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SeniorityLevelPipe } from './pipes/seniorityLevel.pipe';
 import { EmploymentTypePipe } from './pipes/employmentType.pipe';
 import { AddCandidateComponent } from './components/job-apply/add-candidate/add-candidate.component';
+import { CandidatesListComponent } from './components/job-apply/candidates-list/candidates-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddCandidateComponent } from './components/job-apply/add-candidate/add-
     KeysPipe,
     SeniorityLevelPipe,
     EmploymentTypePipe,
-    AddCandidateComponent
+    AddCandidateComponent,
+    CandidatesListComponent
   ],
   imports: [
     BrowserModule,

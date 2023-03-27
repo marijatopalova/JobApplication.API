@@ -1,0 +1,16 @@
+<div class="container" *ngIf="candidates && candidates.length > 0">
+    <div class="row row-cols-1 row-cols-md-3 justify-content-center">
+      <div class="col mb-4" *ngFor="let candidate of candidates">
+        <div class="card">
+            <h5 class="card-header">{{ candidate.firstName }} {{ candidate.lastName }}</h5>
+            <div class="card-body">
+              <h6 class="card-text"><b>Email:</b> {{ candidate.email }}</h6>
+              <p class="card-text"><b>Phone:</b> {{ candidate.phone }}</p>
+              <p class="card-text"><b>Experience:</b> {{ candidate.yearsOfExperience }} years</p>
+              <p class="card-text"><b>Message:</b> {{ candidate.message }}</p>
+              <p class="card-text"><b>Applied on:</b> {{ candidate.dateOfApplication | date }}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

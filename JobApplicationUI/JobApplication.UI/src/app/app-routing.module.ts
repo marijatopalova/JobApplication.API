@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCandidateComponent } from './components/job-apply/add-candidate/add-candidate.component';
+import { CandidatesListComponent } from './components/job-apply/candidates-list/candidates-list.component';
 import { AddJobpostComponent } from './components/job-post/add-jobpost/add-jobpost.component';
 import { JobpostDetailsComponent } from './components/job-post/jobpost-details/jobpost-details.component';
 import { JobpostListComponent } from './components/job-post/jobpost-list/jobpost-list.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'jobposts/edit/:id', component: UpdateJobpostComponent },
   { path: 'jobposts/create', component: AddJobpostComponent },
   { path: 'jobapply/:id', component: AddCandidateComponent },
+  { path: 'candidates/:id', component: CandidatesListComponent },
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ export interface CandidateResponse {
     phone: string;
     yearsOfExperience: number;
     message: string;
+    dateOfApplication: Date;
 }
 
 export interface CreateCandidateRequest {

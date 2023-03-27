@@ -37,7 +37,8 @@ namespace JobApplication.API.Repositories
                     Email = candidate.Email,
                     Phone = candidate.Phone,
                     YearsOfExperience = candidate.YearsOfExperience,
-                    Message = candidate.Message
+                    Message = candidate.Message,
+                    DateOfApplication = DateTime.UtcNow
                 }
             };
 
@@ -49,7 +50,11 @@ namespace JobApplication.API.Repositories
         {
             var candidateIds = context.JobApplicants.Where(x => x.JobPostId == jobPostId).Select(x => x.CandidateId);
 
-            return await context.Candidates.Where(x => candidateIds.Any(v => v.Equals(x.Id))).ToListAsync();
+            return await context.Candidates
+                .Where(x => candidateIds
+                .Any(v => v.Equals(x.Id)))
+                .OrderByDescending(x => x.DateOfApplication)
+                .ToListAsync();
         }
     }
 }
