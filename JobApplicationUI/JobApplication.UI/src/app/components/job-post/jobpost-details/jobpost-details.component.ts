@@ -55,17 +55,18 @@ export class JobpostDetailsComponent implements OnInit{
   }
 
   deleteJobPost(id: number) {
-    this.jobPostService.deleteJobPost(id)
-    .subscribe({
-      next: () => {
-        if(confirm("Are you sure you want to delete this post?")) {
-          this.router.navigate(['jobposts']);
-        }
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
+    if(confirm("Are you sure you want to delete this post?")) {
+        this.jobPostService.deleteJobPost(id)
+          .subscribe({
+            next: () => {
+                this.router.navigate(['jobposts']);
+            },
+            error: (error) => {
+              console.log(error)
+            }
+          })
+    }
+    
   }
 
 }

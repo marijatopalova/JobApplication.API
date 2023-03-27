@@ -80,3 +80,7 @@ a:link {
   pointer-events: none;
   box-shadow: none;
 }
+
+.container-shadow {
+  box-shadow: 0 25px 50px rgba(0,0,0,0.55)
+}
