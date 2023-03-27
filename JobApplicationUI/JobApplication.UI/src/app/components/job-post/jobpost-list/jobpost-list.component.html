@@ -8,8 +8,8 @@
             <h6 class="card-title">{{ jobPost.companyName }}</h6>
             <p class="card-text">{{ jobPost.location }}</p>
             <p class="card-text">{{ jobPost.seniorityLevel | seniorityLevel }}</p>
-            <button type="button" class="button-submit" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
-            <button type="button" class="button-submit" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
+            <button type="button" class="button button-submit" [routerLink]="['/jobposts', 'details', jobPost.id]">View</button> |
+            <button type="button" class="button button-submit" [routerLink]="['/jobapply', jobPost.id]" [disabled]="jobPost.activeStatus == '1'">Apply</button>
           </div>
         </div>
       </div>
